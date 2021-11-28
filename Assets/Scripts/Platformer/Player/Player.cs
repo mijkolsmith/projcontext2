@@ -31,8 +31,6 @@ public class Player : MonoBehaviour
     private string jumpString;
     private string crouchString;
 
-    public bool facingRight;
-
     //public DisablePlatform disablePlatform;
 
     private void Start()
@@ -65,7 +63,6 @@ public class Player : MonoBehaviour
     {
         controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
         jump = false;
-        facingRight = controller.facingRight;
     }
 
     /*private void OnCollisionEnter2D(Collision2D collision)
