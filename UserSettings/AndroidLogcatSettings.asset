@@ -11,25 +11,43 @@
         {
             "deviceId": "ge8xsko7jfjvssmb",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 2779,
+            "processId": 16994,
             "exited": true
         },
         {
             "deviceId": "ge8xsko7jfjvssmb",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 19027,
+            "processId": 18419,
             "exited": true
         },
         {
             "deviceId": "ge8xsko7jfjvssmb",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 19599,
+            "processId": 18754,
             "exited": true
         },
         {
             "deviceId": "ge8xsko7jfjvssmb",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 21022,
+            "processId": 19269,
+            "exited": true
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.miui.home",
+            "processId": 1858,
+            "exited": false
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.google.android.dialer",
+            "processId": 17526,
+            "exited": false
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 20098,
             "exited": true
         }
     ],

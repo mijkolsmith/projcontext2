@@ -22,33 +22,25 @@ public class Player : MonoBehaviour
         invincible = false;
     }
 
+    public Joystick joystick;
     private PlayerController controller;
     private float horizontalMove = 0f;
     public float runSpeed = 40f;
 
     private bool jump = false;
-    private string horizontalString;
-    private string jumpString;
-    private string crouchString;
 
     //public DisablePlatform disablePlatform;
 
     private void Start()
     {
-        horizontalString = gameObject.name + " Horizontal";
-        jumpString = gameObject.name + " Vertical";
-        crouchString = gameObject.name + " Crouch";
+        Application.targetFrameRate = 30;
         controller = GetComponent<PlayerController>();
         sr = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
-        horizontalMove = Input.GetAxisRaw(horizontalString) * runSpeed;
-        if (Input.GetButtonDown(jumpString))
-        {
-            jump = true;
-        }
+        horizontalMove = joystick.Horizontal == 0 ? 0 : joystick.Horizontal > 0 ? runSpeed : -runSpeed;
 
         /*if (Input.GetButton(crouchString))
 		{
@@ -64,6 +56,11 @@ public class Player : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
         jump = false;
     }
+
+    public void Jump()
+	{
+        jump = true;
+    }        
 
     /*private void OnCollisionEnter2D(Collision2D collision)
 	{
