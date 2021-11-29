@@ -11,24 +11,6 @@
         {
             "deviceId": "ge8xsko7jfjvssmb",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 16994,
-            "exited": true
-        },
-        {
-            "deviceId": "ge8xsko7jfjvssmb",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 18419,
-            "exited": true
-        },
-        {
-            "deviceId": "ge8xsko7jfjvssmb",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 18754,
-            "exited": true
-        },
-        {
-            "deviceId": "ge8xsko7jfjvssmb",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 19269,
             "exited": true
         },
@@ -49,6 +31,30 @@
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 20098,
             "exited": true
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 20531,
+            "exited": true
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 20916,
+            "exited": true
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 21264,
+            "exited": true
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.android.settings",
+            "processId": 10060,
+            "exited": false
         }
     ],
     "m_Tags": {

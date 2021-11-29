@@ -232,7 +232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: axisOptions
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: handleRange
@@ -821,7 +821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 962661045194948091, guid: 36130fa0d3b4c104f8261a338aac28d5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 15.75
       objectReference: {fileID: 0}
     - target: {fileID: 962661045194948091, guid: 36130fa0d3b4c104f8261a338aac28d5, type: 3}
       propertyPath: m_LocalPosition.x
