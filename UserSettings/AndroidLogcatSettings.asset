@@ -1,37 +1,13 @@
 {
     "m_SelectedDeviceId": "ge8xsko7jfjvssmb",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "ge8xsko7jfjvssmb",
+        "name": "com.DefaultCompany.com.unity.template.mobile2D",
+        "processId": 12621,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "ge8xsko7jfjvssmb",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 19269,
-            "exited": true
-        },
-        {
-            "deviceId": "ge8xsko7jfjvssmb",
-            "name": "com.miui.home",
-            "processId": 1858,
-            "exited": false
-        },
-        {
-            "deviceId": "ge8xsko7jfjvssmb",
-            "name": "com.google.android.dialer",
-            "processId": 17526,
-            "exited": false
-        },
-        {
-            "deviceId": "ge8xsko7jfjvssmb",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 20098,
-            "exited": true
-        },
         {
             "deviceId": "ge8xsko7jfjvssmb",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
@@ -54,6 +30,30 @@
             "deviceId": "ge8xsko7jfjvssmb",
             "name": "com.android.settings",
             "processId": 10060,
+            "exited": true
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 5398,
+            "exited": true
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.whatsapp",
+            "processId": 7473,
+            "exited": false
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 12160,
+            "exited": false
+        },
+        {
+            "deviceId": "ge8xsko7jfjvssmb",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 12621,
             "exited": false
         }
     ],
