@@ -88,9 +88,6 @@ public class GameManager : MonoBehaviour
         //AddBuilding(newBuilding);
     }
 
-    /// <summary>
-    /// Switch to the survey scene
-    /// </summary>
     public void StartSurvey()
 	{
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
