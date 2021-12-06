@@ -6,7 +6,7 @@ using TMPro;
 public class GatherCoin : MonoBehaviour
 {
 	[SerializeField] private TextMeshProUGUI CoinCounter;
-	private SurveyManager surveyManager;
+	[SerializeField] private SurveyManager surveyManager;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{

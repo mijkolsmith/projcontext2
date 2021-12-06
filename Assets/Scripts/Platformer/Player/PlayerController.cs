@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		bool wasGrounded = m_Grounded;
-		m_Grounded = false;
+		/*bool wasGrounded = m_Grounded;
+		//m_Grounded = false;
 
 		// The player is grounded if a Physics Raycast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
@@ -56,7 +56,11 @@ public class PlayerController : MonoBehaviour
 					OnLandEvent.Invoke();
 				}
 			}
-		}
+		}*/
+
+		// For this game, it's not needed to check whether the player is grounded or not.
+		// You can't spam jump and you have a limited amount of jumps, so we need to be as forgiving as possible.
+		m_Grounded = true;
 	}
 
 	public void Move(float move, bool jump)

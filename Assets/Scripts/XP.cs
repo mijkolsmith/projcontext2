@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO: This class should be renamed to Coins, if it's going to be used
 public class XP : MonoBehaviour
 {
     private int xp;

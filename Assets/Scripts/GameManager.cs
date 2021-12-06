@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private int xp;
+    private int coins;
     private SaveObject saveObject;
     private string saveJson;
 
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         saveObject.buildings = buildings;
         saveJson = JsonUtility.ToJson(saveObject);
         PlayerPrefs.SetString("town", saveJson);
-        PlayerPrefs.SetInt("totalXP", xp);
+        PlayerPrefs.SetInt("totalCoins", coins);
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
             buildings = saveObject.buildings;
         }
 
-        xp = PlayerPrefs.GetInt("totalXP", 0);
+        coins = PlayerPrefs.GetInt("totalCoins", 0);
     }
 
     /// <summary>
@@ -104,12 +104,12 @@ public class GameManager : MonoBehaviour
 
     public void AddXP(int amount)
     {
-        xp += amount;
+        coins += amount;
     }
 
     public int GetXP()
     {
-        return xp;
+        return coins;
     } 
 
     private void OnApplicationQuit()

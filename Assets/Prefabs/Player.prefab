@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherCamera: {fileID: 0}
   player: {fileID: 4206353715182333523}
+  surveyButton: {fileID: 0}
 --- !u!1 &1332304436
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58811c15d2ac93547a913887752698b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoinCounter: {fileID: 0}
 --- !u!1 &7987253127821670853
 GameObject:
   m_ObjectHideFlags: 0

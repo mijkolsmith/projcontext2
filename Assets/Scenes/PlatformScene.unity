@@ -824,7 +824,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &554453663
 RectTransform:
@@ -1377,8 +1377,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AdvanceSurvey, Assembly-CSharp
+      - m_Target: {fileID: 554453664}
+        m_TargetAssemblyTypeName: SurveyManager, Assembly-CSharp
         m_MethodName: NextQuestion
         m_Mode: 1
         m_Arguments:
@@ -2000,6 +2000,10 @@ PrefabInstance:
       propertyPath: CoinCounter
       value: 
       objectReference: {fileID: 642534047}
+    - target: {fileID: 1332304438, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
+      propertyPath: surveyManager
+      value: 
+      objectReference: {fileID: 554453664}
     - target: {fileID: 1934910376, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
       propertyPath: otherCamera
       value: 

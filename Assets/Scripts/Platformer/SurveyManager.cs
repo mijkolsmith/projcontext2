@@ -7,20 +7,20 @@ using UnityEngine.SceneManagement;
 public class SurveyManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI surveyCounter;
-	private int counter = 1;
+	private int questionCounter = 1;
 	private int questions = 5;
-	public int coinCounter;
+	public int coinCounter = 0;
 
 	public void NextQuestion()
 	{
-		if (counter < questions)
+		if (questionCounter < questions)
 		{
-			counter++;
-			surveyCounter.text = "Question " + counter + "/" + questions;
+			questionCounter++;
+			surveyCounter.text = "Question " + questionCounter + "/" + questions;
 		}
 		else
 		{
-			PlayerPrefs.SetInt("totalXP", PlayerPrefs.GetInt("totalXP", 0) + coinCounter);
+			PlayerPrefs.SetInt("totalCoins", PlayerPrefs.GetInt("totalCoins", 0) + coinCounter);
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 		}
 	}
