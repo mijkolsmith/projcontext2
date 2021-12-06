@@ -7,6 +7,7 @@ public class TouchControls : MonoBehaviour
     private Touch finger1, finger2;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject hitObject;
+    private float startZoom;
 
     private void Update()
     {
@@ -14,9 +15,12 @@ public class TouchControls : MonoBehaviour
         {
             if (Input.touchCount == 2)
             {
-                // Assign these 2 fingers to their own variables
-                finger1 = Input.GetTouch(0);
-                finger2 = Input.GetTouch(1);
+                if (finger1.phase == TouchPhase.Began || finger2.phase == TouchPhase.Began)
+                {// Assign these 2 fingers to their own variables
+                    finger1 = Input.GetTouch(0);
+                    finger2 = Input.GetTouch(1);
+                    startZoom = mainCamera.orthographicSize;
+                }
 
                 // When the fingers have moved, update the script to the new location
                 if (finger1.phase == TouchPhase.Moved || finger2.phase == TouchPhase.Moved)
@@ -26,7 +30,12 @@ public class TouchControls : MonoBehaviour
                     // Percentage to zoom in / zoom out
                     float zoomFactor = oldDistance / newDistance;
                     // Zoom in / zoom out
-                    mainCamera.orthographicSize = mainCamera.orthographicSize * zoomFactor;
+                    mainCamera.orthographicSize = startZoom * zoomFactor;
+                }
+
+                if (finger1.phase == TouchPhase.Ended || finger2.phase == TouchPhase.Ended)
+				{
+                    startZoom = mainCamera.orthographicSize;
                 }
             }
             else
