@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 554453661}
   - component: {fileID: 554453660}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: SurveyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1757,7 +1757,7 @@ GameObject:
   - component: {fileID: 1905332080}
   - component: {fileID: 1905332079}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: FixedCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
