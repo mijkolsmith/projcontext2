@@ -4,16 +4,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class AdvanceSurvey : MonoBehaviour
+public class SurveyManager : MonoBehaviour
 {
-    private TextMeshProUGUI surveyCounter;
+    [SerializeField] private TextMeshProUGUI surveyCounter;
 	private int counter = 1;
 	private int questions = 5;
-
-	private void Start()
-	{
-		surveyCounter = GetComponent<TextMeshProUGUI>();
-	}
+	public int coinCounter;
 
 	public void NextQuestion()
 	{
@@ -22,6 +18,10 @@ public class AdvanceSurvey : MonoBehaviour
 			counter++;
 			surveyCounter.text = "Question " + counter + "/" + questions;
 		}
-		else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+		else
+		{
+			PlayerPrefs.SetInt("totalXP", PlayerPrefs.GetInt("totalXP", 0) + coinCounter);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+		}
 	}
 }
