@@ -5,6 +5,8 @@ using UnityEngine;
 public class TouchControls : MonoBehaviour
 {
     private Touch finger1, finger2;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private GameObject hitObject;
 
     private void Update()
     {
@@ -19,12 +21,12 @@ public class TouchControls : MonoBehaviour
                 // When the fingers have moved, update the script to the new location
                 if (finger1.phase == TouchPhase.Moved || finger2.phase == TouchPhase.Moved)
                 {
-                    float baseDistance = Vector2.Distance(this.finger1.position, this.finger2.position);
-                    float currentDistance = Vector2.Distance(finger1.position, finger2.position);
+                    float newDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
+                    float oldDistance = Vector2.Distance(finger1.position, finger2.position);
                     // Percentage to zoom in / zoom out
-                    float currentDistancePercent = currentDistance / baseDistance;
+                    float zoomFactor = oldDistance / newDistance;
                     // Zoom in / zoom out
-                    // transform.localScale = Vector3.one * (currentDistancePercent * 1.5f);
+                    mainCamera.orthographicSize = mainCamera.orthographicSize * zoomFactor;
                 }
             }
             else
@@ -38,7 +40,8 @@ public class TouchControls : MonoBehaviour
                     {
                         // Touches are screen locations, this converts them in to world locations
                         Vector3 position = Camera.main.ScreenToWorldPoint(touch.position);
-                        // Create an empty gameObject at position with a trigger to trigger buttons or hitboxes
+                        // Create an empty gameObject at position with a trigger to trigger hitboxes
+                        Instantiate(hitObject, position, Quaternion.identity, null);
                     }
                 }
             }
