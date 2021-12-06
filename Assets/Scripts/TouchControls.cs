@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TouchControls : MonoBehaviour
 {
-    private Touch finger1, finger2;
+    public Touch finger1, finger2; //public for testing
     [SerializeField] public Camera mainCamera; //public for testing
     [SerializeField] private GameObject hitObject;
     public float startZoom; //public for testing
@@ -16,7 +16,7 @@ public class TouchControls : MonoBehaviour
             if (Input.touchCount == 2)
             {
                 // Assign these 2 fingers to their own variables
-                if (finger1.phase == TouchPhase.Began && finger2.phase == TouchPhase.Began)
+                if (finger1.phase == TouchPhase.Began || finger2.phase == TouchPhase.Began || (finger1.phase == TouchPhase.Stationary && finger2.phase == TouchPhase.Stationary))
                 {
                     startZoom = mainCamera.orthographicSize;
                     finger1 = Input.GetTouch(0);
@@ -50,6 +50,11 @@ public class TouchControls : MonoBehaviour
                     }
                 }
             }
+        }
+        else if (finger1.phase != TouchPhase.Began || finger2.phase != TouchPhase.Began)
+        {
+            finger1.phase = TouchPhase.Began;
+            finger2.phase = TouchPhase.Began;
         }
     }
 }

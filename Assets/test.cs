@@ -18,6 +18,6 @@ public class test : MonoBehaviour
 	//Pinch test
 	private void Update()
 	{
-		tester.text = "orthographic size: " + tc.mainCamera.orthographicSize + "\nstartzoom: " + tc.startZoom;
+		tester.text = "orthographic size: " + tc.mainCamera.orthographicSize + "\nstartzoom: " + tc.startZoom + "\n f1 phase: " + tc.finger1.phase + "\n f2 phase: " + tc.finger2.phase;
 	}
 }
