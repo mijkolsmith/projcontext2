@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -86,6 +87,14 @@ public class GameManager : MonoBehaviour
         //IBuilding newBuilding = new House(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10))) as IBuilding;
         //AddBuilding(newBuilding);
     }
+
+    /// <summary>
+    /// Switch to the survey scene
+    /// </summary>
+    public void StartSurvey()
+	{
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+	}
 
     /// <summary>
     /// Add a building to the list of buildings
