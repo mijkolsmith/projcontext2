@@ -6,10 +6,18 @@ using TMPro;
 public class test : MonoBehaviour
 {
 	public TextMeshPro tester;
+	public TouchControls tc;
 
+	//Touch test (works)
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		tester.text = "bruh";
+		//tester.text = "bruh";
 		Destroy(collision.gameObject);
+	}
+
+	//Pinch test
+	private void Update()
+	{
+		tester.text = "orthographic size: " + tc.mainCamera.orthographicSize + "\nstartzoom: " + tc.startZoom;
 	}
 }

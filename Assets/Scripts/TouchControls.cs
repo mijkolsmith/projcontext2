@@ -5,9 +5,9 @@ using UnityEngine;
 public class TouchControls : MonoBehaviour
 {
     private Touch finger1, finger2;
-    [SerializeField] private Camera mainCamera;
+    [SerializeField] public Camera mainCamera; //public for testing
     [SerializeField] private GameObject hitObject;
-    private float startZoom;
+    public float startZoom; //public for testing
 
     private void Update()
     {
@@ -15,11 +15,12 @@ public class TouchControls : MonoBehaviour
         {
             if (Input.touchCount == 2)
             {
-                if (finger1.phase == TouchPhase.Began || finger2.phase == TouchPhase.Began)
-                {// Assign these 2 fingers to their own variables
+                // Assign these 2 fingers to their own variables
+                if (finger1.phase == TouchPhase.Began && finger2.phase == TouchPhase.Began)
+                {
+                    startZoom = mainCamera.orthographicSize;
                     finger1 = Input.GetTouch(0);
                     finger2 = Input.GetTouch(1);
-                    startZoom = mainCamera.orthographicSize;
                 }
 
                 // When the fingers have moved, update the script to the new location
@@ -31,11 +32,6 @@ public class TouchControls : MonoBehaviour
                     float zoomFactor = oldDistance / newDistance;
                     // Zoom in / zoom out
                     mainCamera.orthographicSize = startZoom * zoomFactor;
-                }
-
-                if (finger1.phase == TouchPhase.Ended || finger2.phase == TouchPhase.Ended)
-				{
-                    startZoom = mainCamera.orthographicSize;
                 }
             }
             else
