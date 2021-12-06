@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwitchScript : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SwitchScript : MonoBehaviour
 	private float timeStartedLerping;
 	private float lerpTime = .25f;
 	[SerializeField] private Player player;
+	[SerializeField] private Button surveyButton;
 
 	private void Start()
 	{
@@ -21,7 +23,6 @@ public class SwitchScript : MonoBehaviour
 	{
 		if (switching)
 		{
-
 			float timeSinceStarted = Time.time - timeStartedLerping;
 			float percentageComplete = timeSinceStarted / lerpTime;
 			camera.rect = new Rect(0, Mathf.SmoothStep(pos1, pos2, percentageComplete), 1, 0.4f);
@@ -34,6 +35,7 @@ public class SwitchScript : MonoBehaviour
 					camera.rect = new Rect(0, pos2, 1, 0.4f);
 					otherCamera.rect = new Rect(0, pos1, 1, 0.4f);
 					switching = false;
+					surveyButton.interactable = true;
 				}
 			}
 			else

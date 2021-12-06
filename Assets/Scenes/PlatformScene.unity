@@ -1387,6 +1387,18 @@ MonoBehaviour:
           m_StringArgument: Question 2/5
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1284885426}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1284885427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,6 +2002,10 @@ PrefabInstance:
       propertyPath: otherCamera
       value: 
       objectReference: {fileID: 221163785}
+    - target: {fileID: 1934910376, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
+      propertyPath: surveyButton
+      value: 
+      objectReference: {fileID: 1284885426}
     - target: {fileID: 4206353715182333523, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
       propertyPath: joystick
       value: 
