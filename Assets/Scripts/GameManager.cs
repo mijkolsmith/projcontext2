@@ -110,7 +110,8 @@ public class GameManager : MonoBehaviour
     public int GetXP()
     {
         return xp;
-    }    
+    } 
+
     private void OnApplicationQuit()
     {
         Save();
