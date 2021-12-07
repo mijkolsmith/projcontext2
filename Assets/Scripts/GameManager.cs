@@ -9,12 +9,12 @@ public class GameManager : MonoBehaviour
     private SaveObject saveObject;
     private string saveJson;
 
-    List<IBuilding> buildings = new();
+    List<IBuilding> buildings;
 
     private void Awake()
     {
         saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
-        buildings = new();
+        buildings = new List<IBuilding>();
         Load();
         BuildTown();
     }
