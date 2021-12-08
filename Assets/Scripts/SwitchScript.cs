@@ -33,7 +33,7 @@ public class SwitchScript : MonoBehaviour
 			camera.rect = new Rect(0, Mathf.SmoothStep(pos1, pos2, percentageComplete), 1, 0.4f);
 			otherCamera.rect = new Rect(0, Mathf.SmoothStep(pos2, pos1, percentageComplete), 1, 0.4f);
 			cameraChains.transform.localPosition = new Vector3(cameraChains.transform.localPosition.x, (2550f * camera.rect.y) - 528.21f, cameraChains.transform.localPosition.z);
-			otherCameraChains.transform.localPosition = new Vector3(otherCameraChains.transform.localPosition.x, (2700f * otherCamera.rect.y) + 351f, otherCameraChains.transform.localPosition.z);
+			otherCameraChains.transform.localPosition = new Vector3(otherCameraChains.transform.localPosition.x, (2550f * otherCamera.rect.y) + 390f, otherCameraChains.transform.localPosition.z);
 
 			if (growing) surveyButton.transform.localScale = Vector3.Lerp(size1, size2, percentageComplete * 1.5f);
 			else surveyButton.transform.localScale = Vector3.Lerp(size2, size1, percentageComplete);
