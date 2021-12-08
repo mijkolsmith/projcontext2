@@ -75,13 +75,13 @@ public class PlayerController : MonoBehaviour
 			m_rb2D.velocity = Vector3.SmoothDamp(m_rb2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
 			// If the input is moving the player right and the player is facing left...
-			if (move < 0 && !m_facingRight)
+			if (move < 0 && m_facingRight)
 			{
 				// ... flip the player.
 				Flip();
 			}
 			// Otherwise if the input is moving the player left and the player is facing right...
-			else if (move > 0 && m_facingRight)
+			else if (move > 0 && !m_facingRight)
 			{
 				// ... flip the player.
 				Flip();
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
 		// Multiply the player's x local scale by -1.
 		Vector3 spriteScale = transform.GetChild(0).localScale;
-		spriteScale.x *= -1;
+		spriteScale.z *= -1; //z is up today
 		transform.GetChild(0).localScale = spriteScale;
 	}
 }
