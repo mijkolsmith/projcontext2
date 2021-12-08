@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,19 +10,22 @@ public class GameManager : MonoBehaviour
     private SaveObject saveObject;
     private string saveJson;
 
+    private TextMeshProUGUI coinText;
+
     List<IBuilding> buildings;
 
     private void Awake()
     {
         saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
         buildings = new List<IBuilding>();
+        coinText = GetComponentInChildren<TextMeshProUGUI>();
         Load();
         BuildTown();
     }
 
     private void FixedUpdate()
     {
-        
+        coinText.text = "Coins: " + coins;
     }
 
     /// <summary>
