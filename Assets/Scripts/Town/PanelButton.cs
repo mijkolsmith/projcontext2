@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PanelButton : MonoBehaviour
 {
-    public GameObject QuestPanel = null;
+    public GameObject panel = null;
 
     public void TogglePanel()
     {
-        QuestPanel.SetActive(!QuestPanel.activeSelf);
+        panel.SetActive(!panel.activeSelf);
     }
 }

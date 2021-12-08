@@ -8,6 +8,6 @@ public class QuestDoneButton : MonoBehaviour
 
     public void Done()
     {
-        FindObjectOfType<GameManager>().AddXP(reward);
+        FindObjectOfType<GameManager>().AddCoins(reward);
     }
 }

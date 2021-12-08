@@ -18,7 +18,12 @@ public class GameManager : MonoBehaviour
         Load();
         BuildTown();
     }
-     
+
+    private void FixedUpdate()
+    {
+        
+    }
+
     /// <summary>
     /// Save the current XP and town layout
     /// </summary>
@@ -66,26 +71,40 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateBuilding()
+    public void CreateBuilding(int cost)
     {
-        //IBuilding newBuilding = new Building(new Vector3(Random.Range(0,10), Random.Range(0, 2), Random.Range(0, 10))) as IBuilding;
-        GameObject createdBuilding = Instantiate(Resources.Load("Foundation")) as GameObject;
-        createdBuilding.AddComponent<Building>();
-        IBuilding newBuilding = createdBuilding.GetComponent<Building>();
-        newBuilding.Build(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
-        Debug.Log(newBuilding);
-        //buildings.Add(newBuilding);
+        if (coins >= cost)
+        {
+            coins -= cost;
+            //IBuilding newBuilding = new Building(new Vector3(Random.Range(0,10), Random.Range(0, 2), Random.Range(0, 10))) as IBuilding;
+            GameObject createdBuilding = Instantiate(Resources.Load("Foundation")) as GameObject;
+            createdBuilding.AddComponent<Building>();
+            IBuilding newBuilding = createdBuilding.GetComponent<Building>();
+            newBuilding.Build(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
+            Debug.Log(newBuilding);
+            //buildings.Add(newBuilding);
+        } else
+        {
+            Debug.Log("Not enough coins");
+        }
     }    
     
-    public void CreateHouse()
+    public void CreateHouse(int cost)
     {
-        GameObject createdBuilding = Instantiate(Resources.Load("Foundation")) as GameObject;
-        createdBuilding.AddComponent<House>();
-        IBuilding newBuilding = createdBuilding.GetComponent<House>();
-        newBuilding.Build(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
-        Debug.Log(newBuilding);
-        //IBuilding newBuilding = new House(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10))) as IBuilding;
-        //AddBuilding(newBuilding);
+        if (coins >= cost)
+        {
+            coins -= cost;
+            GameObject createdBuilding = Instantiate(Resources.Load("Foundation")) as GameObject;
+            createdBuilding.AddComponent<House>();
+            IBuilding newBuilding = createdBuilding.GetComponent<House>();
+            newBuilding.Build(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
+            Debug.Log(newBuilding);
+            //IBuilding newBuilding = new House(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10))) as IBuilding;
+            //AddBuilding(newBuilding);
+        } else
+        {
+            Debug.Log("Not enough coins");
+        }
     }
 
     public void StartSurvey()
@@ -102,12 +121,12 @@ public class GameManager : MonoBehaviour
         buildings.Add(building);
     }
 
-    public void AddXP(int amount)
+    public void AddCoins(int amount)
     {
         coins += amount;
     }
 
-    public int GetXP()
+    public int GetCoins()
     {
         return coins;
     } 
