@@ -18,7 +18,7 @@ public class TouchControls : MonoBehaviour
                 // Assign these 2 fingers to their own variables
                 if (finger1.phase == TouchPhase.Began || finger2.phase == TouchPhase.Began || (finger1.phase == TouchPhase.Stationary && finger2.phase == TouchPhase.Stationary))
                 {
-                    startZoom = mainCamera.orthographicSize;
+                    startZoom = mainCamera.fieldOfView;
                     finger1 = Input.GetTouch(0);
                     finger2 = Input.GetTouch(1);
                 }
@@ -31,7 +31,7 @@ public class TouchControls : MonoBehaviour
                     // Percentage to zoom in / zoom out
                     float zoomFactor = oldDistance / newDistance;
                     // Zoom in / zoom out
-                    mainCamera.orthographicSize = startZoom * zoomFactor;
+                    mainCamera.fieldOfView = startZoom * zoomFactor;
                 }
             }
             else
