@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TownScene.unity
     guid: 4c493f3d68c37db46ba3b118609631dc
   - enabled: 1
+    path: Assets/Scenes/3DLevel.unity
+    guid: f9bf7f4d6f4fced46a6acee642ec2c73
+  - enabled: 0
     path: Assets/Scenes/3DtestPlatformScene.unity
     guid: e151ffcdf17fb5a4e8577e571e5bf2b9
   m_configObjects: {}
