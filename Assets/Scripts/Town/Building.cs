@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Building : MonoBehaviour, IBuilding
 {
     [SerializeReference] protected Vector3 coordinate;

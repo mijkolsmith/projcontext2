@@ -7,20 +7,24 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private int coins;
-    private SaveObject saveObject;
+    protected SaveObject saveObject;
     private string saveJson;
 
     private TextMeshProUGUI coinText;
 
-    List<IBuilding> buildings;
+    List<Building> buildings;
 
     private void Awake()
     {
         saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
-        buildings = new List<IBuilding>();
+        buildings = new List<Building>();
         coinText = GetComponentInChildren<TextMeshProUGUI>();
         Load();
-        BuildTown();
+    }
+
+    private void Start()
+    {
+        // BuildTown();
     }
 
     private void FixedUpdate()
@@ -33,11 +37,16 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Save()
     {
+        /*
         //saveObject = new SaveObject(buildings);
         //saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
-        saveObject.buildings = buildings;
-        saveJson = JsonUtility.ToJson(saveObject);
+        //saveObject.buildings = buildings;
+        saveJson = saveObject.SaveToJson(buildings);
+        Debug.Log(saveJson);
+        //object toSave = saveObject;
+        //saveJson = JsonUtility.ToJson(toSave);
         PlayerPrefs.SetString("town", saveJson);
+        */
         PlayerPrefs.SetInt("totalCoins", coins);
     }
 
@@ -46,18 +55,27 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Load()
     {
+        /*
         saveJson = PlayerPrefs.GetString("town");
-        if (saveJson == "")
+        if (saveJson == "{}" || saveJson == null)
         {
             saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
-            buildings = new List<IBuilding>();
+            buildings = new List<Building>();
         }
         else
         {
             JsonUtility.FromJsonOverwrite(saveJson, saveObject);
-            buildings = saveObject.buildings;
+            if (saveObject.buildingJsons == null || saveObject.buildingJsons.Count == 0) 
+            {
+                coins = PlayerPrefs.GetInt("totalCoins", 0);
+                return;
+            }
+            foreach (string s in saveObject.buildingJsons)
+            {
+                buildings.Add(JsonUtility.FromJson<Building>(s));
+            }
         }
-
+        */
         coins = PlayerPrefs.GetInt("totalCoins", 0);
     }
 
@@ -66,11 +84,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void BuildTown()
     {
-        if (buildings != null)
+        if (buildings.Count > 0)
         {
-            foreach (IBuilding b in buildings)
+            foreach (Building b in buildings)
             {
-                b.Build(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
+                b.Build(b.GetCoordinate());
             }
         }
     }
@@ -83,10 +101,10 @@ public class GameManager : MonoBehaviour
             //IBuilding newBuilding = new Building(new Vector3(Random.Range(0,10), Random.Range(0, 2), Random.Range(0, 10))) as IBuilding;
             GameObject createdBuilding = Instantiate(Resources.Load("Foundation")) as GameObject;
             createdBuilding.AddComponent<Building>();
-            IBuilding newBuilding = createdBuilding.GetComponent<Building>();
-            newBuilding.Build(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
+            Building newBuilding = createdBuilding.GetComponent<Building>();
+            newBuilding.Build(new Vector3((int)Random.Range(0, 10), (int)Random.Range(0, 2.9f), (int)Random.Range(0, 10)));
             Debug.Log(newBuilding);
-            //buildings.Add(newBuilding);
+            buildings.Add(newBuilding);
         } else
         {
             Debug.Log("Not enough coins");
@@ -100,11 +118,11 @@ public class GameManager : MonoBehaviour
             coins -= cost;
             GameObject createdBuilding = Instantiate(Resources.Load("Foundation")) as GameObject;
             createdBuilding.AddComponent<House>();
-            IBuilding newBuilding = createdBuilding.GetComponent<House>();
+            Building newBuilding = createdBuilding.GetComponent<House>();
             newBuilding.Build(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
-            Debug.Log(newBuilding);
+            //Debug.Log(newBuilding);
             //IBuilding newBuilding = new House(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10))) as IBuilding;
-            //AddBuilding(newBuilding);
+            AddBuilding(newBuilding);
         } else
         {
             Debug.Log("Not enough coins");
@@ -120,7 +138,7 @@ public class GameManager : MonoBehaviour
     /// Add a building to the list of buildings
     /// </summary>
     /// <param name="building"></param>
-    private void AddBuilding(IBuilding building)
+    private void AddBuilding(Building building)
     {
         buildings.Add(building);
     }
@@ -137,6 +155,6 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Save();
+       Save();
     }
 }
