@@ -113,9 +113,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 5314f18071ce4424d829744f98c291e8, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5314f18071ce4424d829744f98c291e8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: baefba34f52f35c4b9db1f6b94f30199, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ea83807f29e4974695011a77207d97b, type: 2}
     - target: {fileID: 919132149155446097, guid: 5314f18071ce4424d829744f98c291e8, type: 3}
       propertyPath: m_Name
       value: CoinModel

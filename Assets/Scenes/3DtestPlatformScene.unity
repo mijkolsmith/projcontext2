@@ -939,6 +939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surveyCounter: {fileID: 189966250}
+  CoinCounter: {fileID: 0}
   coinCounter: 0
 --- !u!1001 &591951734
 PrefabInstance:
@@ -1256,7 +1257,6 @@ GameObject:
   - component: {fileID: 757679844}
   - component: {fileID: 757679843}
   - component: {fileID: 757679842}
-  - component: {fileID: 757679841}
   m_Layer: 5
   m_Name: ChainCanvas2
   m_TagString: Untagged
@@ -1264,20 +1264,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &757679841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 757679840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44ba535fe1203da46a22804c0ba7d5d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surveyCounter: {fileID: 0}
-  coinCounter: 0
 --- !u!114 &757679842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1388,7 +1374,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9869693, b: 0.92941177, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1446,14 +1432,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 768418672}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 4.2, y: 3.39, z: 0}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 4.2, y: 3.39, z: -8.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!1001 &808762193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2221,7 +2207,6 @@ GameObject:
   - component: {fileID: 1391930741}
   - component: {fileID: 1391930740}
   - component: {fileID: 1391930739}
-  - component: {fileID: 1391930738}
   m_Layer: 5
   m_Name: ChainCanvas1
   m_TagString: Untagged
@@ -2229,20 +2214,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1391930738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1391930737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44ba535fe1203da46a22804c0ba7d5d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surveyCounter: {fileID: 0}
-  coinCounter: 0
 --- !u!114 &1391930739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2658,34 +2629,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 519420031, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
-      propertyPath: m_Depth
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 519420031, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 519420031, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
-      propertyPath: m_FOVAxisMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 519420031, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
-      propertyPath: near clip plane
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 519420031, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.33962262
-      objectReference: {fileID: 0}
-    - target: {fileID: 519420031, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.2716981
-      objectReference: {fileID: 0}
-    - target: {fileID: 519420031, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.25471696
-      objectReference: {fileID: 0}
     - target: {fileID: 519420032, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
       propertyPath: m_LocalPosition.z
       value: -7
@@ -2714,6 +2657,10 @@ PrefabInstance:
       propertyPath: otherCameraChains
       value: 
       objectReference: {fileID: 1198773321}
+    - target: {fileID: 826258634679725316, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4206353715182333523, guid: 6081fe2dac6097e43b0e551080399e0b, type: 3}
       propertyPath: joystick
       value: 

@@ -5,7 +5,6 @@ using TMPro;
 
 public class GatherCoin : MonoBehaviour
 {
-	[SerializeField] private TextMeshProUGUI CoinCounter;
 	[SerializeField] private SurveyManager surveyManager;
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -14,7 +13,6 @@ public class GatherCoin : MonoBehaviour
 		{
 			Destroy(collision.gameObject);
 			surveyManager.coinCounter++;
-			CoinCounter.text = "Coins: " + surveyManager.coinCounter;
 		}
 	}
 }
