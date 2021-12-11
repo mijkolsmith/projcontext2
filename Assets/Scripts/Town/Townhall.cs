@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class House : Building
+public class Townhall : Building
 {
-    public House(Vector3 coordinate) : base(coordinate)
+    public Townhall(Vector3 coordinate) : base(coordinate)
     {
+
     }
 
     protected override void CreateBuilding(Vector3 pos)
     {
-        model = Resources.Load("House");
+        model = Resources.Load("Townhall");
+        if (model == null) model = Resources.Load("Building");
         coordinate = pos;
-        size = new Vector3(1, 1, 2);
+        size = new Vector3(2, 2, 3);
     }
 
     public override void Build(Vector3 pos)
@@ -22,6 +24,6 @@ public class House : Building
 
     public override GameManager.BuildingType GetBuildType()
     {
-        return GameManager.BuildingType.House;
+        return GameManager.BuildingType.Townhall;
     }
 }

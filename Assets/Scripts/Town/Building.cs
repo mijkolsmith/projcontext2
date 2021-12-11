@@ -40,15 +40,8 @@ public class Building : MonoBehaviour, IBuilding
         structure.transform.localScale = Vector3.Scale(structure.transform.localScale, size);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public virtual GameManager.BuildingType GetBuildType()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return GameManager.BuildingType.Default;
     }
 }
