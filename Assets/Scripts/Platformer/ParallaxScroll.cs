@@ -14,6 +14,6 @@ public class ParallaxScroll : MonoBehaviour
 
 	private void Update()
 	{
-		transform.localPosition = new Vector3(startPos.x + player.transform.localPosition.x / 2, startPos.y + player.transform.localPosition.y / 2, transform.localPosition.z);
+		transform.localPosition = new Vector3(startPos.x + player.transform.localPosition.x / 1.5f, startPos.y + player.transform.localPosition.y / 2, transform.localPosition.z);
 	}
 }
