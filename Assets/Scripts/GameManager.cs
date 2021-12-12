@@ -36,6 +36,15 @@ public class GameManager : MonoBehaviour
         coinText.text = "Coins: " + coins;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PlayerPrefs.DeleteKey("town");
+            buildings = new List<Building>();
+        }
+    }
+
     private void SetUpLedger()
     {
         buildingCosts = new Dictionary<BuildingType, int>();
@@ -56,7 +65,7 @@ public class GameManager : MonoBehaviour
         //saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
         //saveObject.buildings = buildings;
         saveJson = saveObject.SaveToJson(buildings);
-        Debug.Log(saveJson);
+        //Debug.Log(saveJson);
         //object toSave = saveObject;
         //saveJson = JsonUtility.ToJson(toSave);
         PlayerPrefs.SetString("town", saveJson);
@@ -85,11 +94,13 @@ public class GameManager : MonoBehaviour
                 return;
             }
 
-            foreach (KeyValuePair<Vector3, BuildingType> kvp in saveObject.buildings)
+            
+            foreach (BuildingStruct b in saveObject.buildings)
             {
-                BuildBuilding(kvp.Value, kvp.Key);
+                BuildBuilding(b.buildType, b.coordinates);
                 //buildings.Add(JsonUtility.FromJson<Building>(s));
             }
+            
         }
 
         coins = PlayerPrefs.GetInt("totalCoins", 0);
@@ -212,6 +223,7 @@ public class GameManager : MonoBehaviour
         Save();
     }
 
+    [System.Serializable]
     public enum BuildingType 
     {
         Default,

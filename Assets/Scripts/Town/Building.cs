@@ -37,7 +37,7 @@ public class Building : MonoBehaviour, IBuilding
         CreateBuilding(pos);
         GameObject structure = Instantiate(model, this.transform) as GameObject;
         structure.transform.position = coordinate;
-        structure.transform.localScale = Vector3.Scale(structure.transform.localScale, size);
+        //structure.transform.localScale = Vector3.Scale(structure.transform.localScale, size);
     }
 
     public virtual GameManager.BuildingType GetBuildType()
