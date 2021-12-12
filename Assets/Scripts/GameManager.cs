@@ -7,20 +7,28 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private int coins;
-    private SaveObject saveObject;
+    protected SaveObject saveObject;
     private string saveJson;
 
     private TextMeshProUGUI coinText;
 
-    List<IBuilding> buildings;
+    Dictionary<BuildingType, int> buildingCosts;
+    List<Building> buildings;
+    GameObject foundation;
 
     private void Awake()
     {
         saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
-        buildings = new List<IBuilding>();
+        buildings = new List<Building>();
+        foundation = (GameObject)Resources.Load("Foundation");
+        SetUpLedger();
         coinText = GetComponentInChildren<TextMeshProUGUI>();
         Load();
-        BuildTown();
+    }
+
+    private void Start()
+    {
+        // BuildTown();
     }
 
     private void FixedUpdate()
@@ -28,16 +36,40 @@ public class GameManager : MonoBehaviour
         coinText.text = "Coins: " + coins;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PlayerPrefs.DeleteKey("town");
+            buildings = new List<Building>();
+        }
+    }
+
+    private void SetUpLedger()
+    {
+        buildingCosts = new Dictionary<BuildingType, int>();
+        buildingCosts.Add(BuildingType.House, 100);
+        buildingCosts.Add(BuildingType.Church, 1500);
+        buildingCosts.Add(BuildingType.Townhall, 800);
+        buildingCosts.Add(BuildingType.Windmill, 300);
+        buildingCosts.Add(BuildingType.Default, 500);
+    }
+
     /// <summary>
     /// Save the current XP and town layout
     /// </summary>
     public void Save()
     {
+
         //saveObject = new SaveObject(buildings);
         //saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
-        saveObject.buildings = buildings;
-        saveJson = JsonUtility.ToJson(saveObject);
+        //saveObject.buildings = buildings;
+        saveJson = saveObject.SaveToJson(buildings);
+        //Debug.Log(saveJson);
+        //object toSave = saveObject;
+        //saveJson = JsonUtility.ToJson(toSave);
         PlayerPrefs.SetString("town", saveJson);
+
         PlayerPrefs.SetInt("totalCoins", coins);
     }
 
@@ -46,16 +78,29 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Load()
     {
+        buildings = new List<Building>();
+
         saveJson = PlayerPrefs.GetString("town");
-        if (saveJson == "")
+        if (saveJson == "{}" || saveJson == null)
         {
             saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
-            buildings = new List<IBuilding>();
         }
         else
         {
             JsonUtility.FromJsonOverwrite(saveJson, saveObject);
-            buildings = saveObject.buildings;
+            if (saveObject.buildings == null || saveObject.buildings.Count == 0)
+            {
+                coins = PlayerPrefs.GetInt("totalCoins", 0);
+                return;
+            }
+
+            
+            foreach (BuildingStruct b in saveObject.buildings)
+            {
+                BuildBuilding(b.buildType, b.coordinates);
+                //buildings.Add(JsonUtility.FromJson<Building>(s));
+            }
+            
         }
 
         coins = PlayerPrefs.GetInt("totalCoins", 0);
@@ -66,61 +111,99 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void BuildTown()
     {
-        if (buildings != null)
+        if (buildings.Count > 0)
         {
-            foreach (IBuilding b in buildings)
+            foreach (Building b in buildings)
             {
-                b.Build(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
+                b.Build(b.GetCoordinate());
             }
         }
     }
 
-    public void CreateBuilding(int cost)
+    public void CreateBuilding(int _type)
     {
+        Mathf.Clamp(_type, 0, 4);
+        int cost = buildingCosts[(BuildingType)_type];
         if (coins >= cost)
         {
             coins -= cost;
+            BuildBuilding((BuildingType)_type, new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
             //IBuilding newBuilding = new Building(new Vector3(Random.Range(0,10), Random.Range(0, 2), Random.Range(0, 10))) as IBuilding;
-            GameObject createdBuilding = Instantiate(Resources.Load("Foundation")) as GameObject;
+            /*
+            GameObject createdBuilding = Instantiate(foundation);
             createdBuilding.AddComponent<Building>();
-            IBuilding newBuilding = createdBuilding.GetComponent<Building>();
-            newBuilding.Build(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
+            Building newBuilding = createdBuilding.GetComponent<Building>();
+            newBuilding.Build(new Vector3((int)Random.Range(0, 10), (int)Random.Range(0, 2.9f), (int)Random.Range(0, 10)));
             Debug.Log(newBuilding);
-            //buildings.Add(newBuilding);
-        } else
-        {
-            Debug.Log("Not enough coins");
-        }
-    }    
-    
-    public void CreateHouse(int cost)
-    {
-        if (coins >= cost)
-        {
-            coins -= cost;
-            GameObject createdBuilding = Instantiate(Resources.Load("Foundation")) as GameObject;
-            createdBuilding.AddComponent<House>();
-            IBuilding newBuilding = createdBuilding.GetComponent<House>();
-            newBuilding.Build(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
-            Debug.Log(newBuilding);
-            //IBuilding newBuilding = new House(new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10))) as IBuilding;
-            //AddBuilding(newBuilding);
+            buildings.Add(newBuilding);
+            */
         } else
         {
             Debug.Log("Not enough coins");
         }
     }
 
+    private void BuildBuilding(BuildingType _type, Vector3 coord)
+    {
+        GameObject createdBuilding;
+        Building newBuilding;
+        switch (_type)
+        {
+            case (BuildingType.House):
+                createdBuilding = Instantiate(foundation);
+                createdBuilding.AddComponent<House>();
+                newBuilding = createdBuilding.GetComponent<Building>();
+                newBuilding.Build(coord);
+                buildings.Add(newBuilding);
+                break;
+            case (BuildingType.Church):
+                createdBuilding = Instantiate(foundation);
+                createdBuilding.AddComponent<Church>();
+                newBuilding = createdBuilding.GetComponent<Building>();
+                newBuilding.Build(coord);
+                buildings.Add(newBuilding);
+                break;
+            case (BuildingType.Townhall):
+                createdBuilding = Instantiate(foundation);
+                createdBuilding.AddComponent<Townhall>();
+                newBuilding = createdBuilding.GetComponent<Building>();
+                newBuilding.Build(coord);
+                buildings.Add(newBuilding);
+                break;
+            case (BuildingType.Windmill):
+                createdBuilding = Instantiate(foundation);
+                createdBuilding.AddComponent<Windmill>();
+                newBuilding = createdBuilding.GetComponent<Building>();
+                newBuilding.Build(coord);
+                buildings.Add(newBuilding);
+                break;
+            case (BuildingType.Default):
+                createdBuilding = Instantiate(foundation);
+                createdBuilding.AddComponent<Building>();
+                newBuilding = createdBuilding.GetComponent<Building>();
+                newBuilding.Build(coord);
+                buildings.Add(newBuilding);
+                break;
+            default:
+                createdBuilding = Instantiate(foundation);
+                createdBuilding.AddComponent<Building>();
+                newBuilding = createdBuilding.GetComponent<Building>();
+                newBuilding.Build(coord);
+                buildings.Add(newBuilding);
+                break;
+        }
+    }
+
     public void StartSurvey()
-	{
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-	}
+    }
 
     /// <summary>
     /// Add a building to the list of buildings
     /// </summary>
     /// <param name="building"></param>
-    private void AddBuilding(IBuilding building)
+    private void AddBuilding(Building building)
     {
         buildings.Add(building);
     }
@@ -133,10 +216,20 @@ public class GameManager : MonoBehaviour
     public int GetCoins()
     {
         return coins;
-    } 
+    }
 
     private void OnApplicationQuit()
     {
         Save();
+    }
+
+    [System.Serializable]
+    public enum BuildingType 
+    {
+        Default,
+        House,
+        Church,
+        Townhall,
+        Windmill
     }
 }

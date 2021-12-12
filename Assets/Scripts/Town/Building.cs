@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Building : MonoBehaviour, IBuilding
 {
     [SerializeReference] protected Vector3 coordinate;
@@ -36,18 +37,11 @@ public class Building : MonoBehaviour, IBuilding
         CreateBuilding(pos);
         GameObject structure = Instantiate(model, this.transform) as GameObject;
         structure.transform.position = coordinate;
-        structure.transform.localScale = Vector3.Scale(structure.transform.localScale, size);
+        //structure.transform.localScale = Vector3.Scale(structure.transform.localScale, size);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public virtual GameManager.BuildingType GetBuildType()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return GameManager.BuildingType.Default;
     }
 }
