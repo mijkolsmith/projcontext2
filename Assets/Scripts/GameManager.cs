@@ -6,16 +6,19 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    private int coins;
-    protected SaveObject saveObject;
-    private string saveJson;
+    private int coins;                                      //total amount of coins available
+    protected SaveObject saveObject;                        //object to encapsulate list for saving using json
+    private string saveJson;                                //the json string for saving town layout
 
-    private TextMeshProUGUI coinText;
+    private TextMeshProUGUI coinText;                       //UI element displaying current amount of coins
 
-    Dictionary<BuildingType, int> buildingCosts;
-    List<Building> buildings;
-    GameObject foundation;
+    private Dictionary<BuildingType, int> buildingCosts;    //ledger to set coin cost per building
+    private List<Building> buildings;                       //list of buildings currently in town
+    private GameObject foundation;                          //foundation to copy for new buildings
 
+    /// <summary>
+    /// Initiate parameters, Load town & coins
+    /// </summary>
     private void Awake()
     {
         saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
@@ -26,25 +29,33 @@ public class GameManager : MonoBehaviour
         Load();
     }
 
-    private void Start()
-    {
-        // BuildTown();
-    }
-
+    /// <summary>
+    /// update UI to reflect current amount of coins
+    /// </summary>
     private void FixedUpdate()
     {
         coinText.text = "Coins: " + coins;
     }
 
+    /// <summary>
+    /// delete references to current buildings
+    /// </summary>
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
             PlayerPrefs.DeleteKey("town");
+            foreach (Building b in buildings)
+            {
+                Destroy(b.gameObject, 0);
+            }
             buildings = new List<Building>();
         }
     }
 
+    /// <summary>
+    /// initiate dictionary for different building costs
+    /// </summary>
     private void SetUpLedger()
     {
         buildingCosts = new Dictionary<BuildingType, int>();
@@ -56,70 +67,56 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Save the current XP and town layout
+    /// Save the current coins and town layout to playerprefs
     /// </summary>
     public void Save()
     {
-
-        //saveObject = new SaveObject(buildings);
-        //saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
-        //saveObject.buildings = buildings;
         saveJson = saveObject.SaveToJson(buildings);
         //Debug.Log(saveJson);
-        //object toSave = saveObject;
-        //saveJson = JsonUtility.ToJson(toSave);
         PlayerPrefs.SetString("town", saveJson);
 
         PlayerPrefs.SetInt("totalCoins", coins);
     }
 
     /// <summary>
-    /// load previously saved XP and town layout, if none exists yet create object for town layout
+    /// load previously saved coins and town layout, if none exists yet create object for town layout
     /// </summary>
     private void Load()
     {
         buildings = new List<Building>();
 
         saveJson = PlayerPrefs.GetString("town");
+        //if no layout has been saved yet, create a new object to hold the layout
         if (saveJson == "{}" || saveJson == null)
         {
             saveObject = ScriptableObject.CreateInstance("SaveObject") as SaveObject;
         }
         else
         {
+            //overwrite saveObject with data saved to playerprefs
             JsonUtility.FromJsonOverwrite(saveJson, saveObject);
+
+            //if no buildings have been saved yet, only get current amount of coins
             if (saveObject.buildings == null || saveObject.buildings.Count == 0)
             {
                 coins = PlayerPrefs.GetInt("totalCoins", 0);
                 return;
             }
 
-            
+            //build the saved buildings
             foreach (BuildingStruct b in saveObject.buildings)
             {
                 BuildBuilding(b.buildType, b.coordinates);
-                //buildings.Add(JsonUtility.FromJson<Building>(s));
             }
-            
         }
 
         coins = PlayerPrefs.GetInt("totalCoins", 0);
     }
 
     /// <summary>
-    /// build the town that was loaded
+    /// buy and build a new building if the player has enough coins
     /// </summary>
-    private void BuildTown()
-    {
-        if (buildings.Count > 0)
-        {
-            foreach (Building b in buildings)
-            {
-                b.Build(b.GetCoordinate());
-            }
-        }
-    }
-
+    /// <param name="_type">the int corresponding to the enum BuilingType</param>
     public void CreateBuilding(int _type)
     {
         Mathf.Clamp(_type, 0, 4);
@@ -127,102 +124,93 @@ public class GameManager : MonoBehaviour
         if (coins >= cost)
         {
             coins -= cost;
-            BuildBuilding((BuildingType)_type, new Vector3(Random.Range(0, 10), Random.Range(0, 2), Random.Range(0, 10)));
-            //IBuilding newBuilding = new Building(new Vector3(Random.Range(0,10), Random.Range(0, 2), Random.Range(0, 10))) as IBuilding;
-            /*
-            GameObject createdBuilding = Instantiate(foundation);
-            createdBuilding.AddComponent<Building>();
-            Building newBuilding = createdBuilding.GetComponent<Building>();
-            newBuilding.Build(new Vector3((int)Random.Range(0, 10), (int)Random.Range(0, 2.9f), (int)Random.Range(0, 10)));
-            Debug.Log(newBuilding);
-            buildings.Add(newBuilding);
-            */
+            BuildBuilding((BuildingType)_type, new Vector3(Random.Range(0, 50), Random.Range(0, 2), Random.Range(0, 50)));
         } else
         {
             Debug.Log("Not enough coins");
         }
     }
 
+    /// <summary>
+    /// Build the building and add it to the list of buildings
+    /// </summary>
+    /// <param name="_type">the building type</param>
+    /// <param name="coord">the coordinate to build the building at</param>
     private void BuildBuilding(BuildingType _type, Vector3 coord)
     {
         GameObject createdBuilding;
         Building newBuilding;
+
+        //create a foundation to hold the building
+        createdBuilding = Instantiate(foundation);
+
+        //add the right child component per building type to the foundation
         switch (_type)
         {
             case (BuildingType.House):
-                createdBuilding = Instantiate(foundation);
                 createdBuilding.AddComponent<House>();
-                newBuilding = createdBuilding.GetComponent<Building>();
-                newBuilding.Build(coord);
-                buildings.Add(newBuilding);
                 break;
             case (BuildingType.Church):
-                createdBuilding = Instantiate(foundation);
                 createdBuilding.AddComponent<Church>();
-                newBuilding = createdBuilding.GetComponent<Building>();
-                newBuilding.Build(coord);
-                buildings.Add(newBuilding);
                 break;
             case (BuildingType.Townhall):
-                createdBuilding = Instantiate(foundation);
                 createdBuilding.AddComponent<Townhall>();
-                newBuilding = createdBuilding.GetComponent<Building>();
-                newBuilding.Build(coord);
-                buildings.Add(newBuilding);
                 break;
             case (BuildingType.Windmill):
-                createdBuilding = Instantiate(foundation);
                 createdBuilding.AddComponent<Windmill>();
-                newBuilding = createdBuilding.GetComponent<Building>();
-                newBuilding.Build(coord);
-                buildings.Add(newBuilding);
                 break;
             case (BuildingType.Default):
-                createdBuilding = Instantiate(foundation);
                 createdBuilding.AddComponent<Building>();
-                newBuilding = createdBuilding.GetComponent<Building>();
-                newBuilding.Build(coord);
-                buildings.Add(newBuilding);
                 break;
             default:
-                createdBuilding = Instantiate(foundation);
                 createdBuilding.AddComponent<Building>();
-                newBuilding = createdBuilding.GetComponent<Building>();
-                newBuilding.Build(coord);
-                buildings.Add(newBuilding);
                 break;
         }
+
+        //use the added building component to build the correct building and save to buildings list
+        newBuilding = createdBuilding.GetComponent<Building>();
+        newBuilding.Build(coord);
+        buildings.Add(newBuilding);
     }
 
+    /// <summary>
+    /// save coins and town and go to the survey scene
+    /// </summary>
     public void StartSurvey()
     {
+        Save();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     /// <summary>
-    /// Add a building to the list of buildings
+    /// add coins to the total amount of coins available
     /// </summary>
-    /// <param name="building"></param>
-    private void AddBuilding(Building building)
-    {
-        buildings.Add(building);
-    }
-
+    /// <param name="amount">the amount of coins to add</param>
     public void AddCoins(int amount)
     {
         coins += amount;
     }
 
+    /// <summary>
+    /// get the current amount of posessed coins
+    /// </summary>
+    /// <returns>total coins posessed</returns>
     public int GetCoins()
     {
         return coins;
     }
 
+    /// <summary>
+    /// save coins and town on quit
+    /// </summary>
     private void OnApplicationQuit()
     {
         Save();
     }
 
+    /// <summary>
+    /// the type of building
+    /// </summary>
     [System.Serializable]
     public enum BuildingType 
     {

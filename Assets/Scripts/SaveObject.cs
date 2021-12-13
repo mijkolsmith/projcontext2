@@ -4,35 +4,31 @@ using UnityEngine;
 
 public class SaveObject : ScriptableObject
 {
-    //public Dictionary<Vector3, GameManager.BuildingType> buildings = new Dictionary<Vector3, GameManager.BuildingType>();
-    //public Dictionary<string, string> test = new Dictionary<string, string>();
-    //public List<string> buildingJsons = new List<string>();
+    //list of BuildingStructs containing info on each saved building
     public List<BuildingStruct> buildings = new List<BuildingStruct>();
 
-    /*public SaveObject(List<Building> buildingList)
-    {
-        buildings = buildingList;
-    }*/
-
+    /// <summary>
+    /// create a json string cotaining a list of BuildingStructs to save to playerprefs
+    /// </summary>
+    /// <param name="_buildings">list of buildings currently in town</param>
+    /// <returns>json with list of BuildingStructs</returns>
     public string SaveToJson(List<Building> _buildings)
     {
-        /*
-        buildingJsons = new List<string>();
-        foreach (Building b in _buildings)
-        {
-            buildingJsons.Add(JsonUtility.ToJson(b));
-        }
-        */
+        //initialize new list to avoid saving double
         buildings = new List<BuildingStruct>();
+        
+        //create struct for each building in town and save those to BuildingStruct list
         foreach (Building b in _buildings)
         {
-            //buildings.Add(b.GetCoordinate(), b.GetBuildType());
-            BuildingStruct buildingObj = new BuildingStruct();
-            buildingObj.coordinates = b.GetCoordinate();
-            buildingObj.buildType = b.GetBuildType();
+            BuildingStruct buildingObj = new BuildingStruct
+            {
+                coordinates = b.GetCoordinate(),
+                buildType = b.GetBuildType()
+            };
             buildings.Add(buildingObj);
         }
 
+        //return json string containing list of BuildingStructs
         return JsonUtility.ToJson(this);
     }
 }
