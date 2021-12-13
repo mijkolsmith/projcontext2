@@ -939,7 +939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surveyCounter: {fileID: 189966250}
-  CoinCounter: {fileID: 0}
+  CoinCounter: {fileID: 642534047}
   coinCounter: 0
 --- !u!1001 &591951734
 PrefabInstance:

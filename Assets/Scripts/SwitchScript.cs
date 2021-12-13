@@ -17,6 +17,7 @@ public class SwitchScript : MonoBehaviour
 	private float lerpTime = .4f;
 	[SerializeField] private Player player;
 	[SerializeField] private Button surveyButton;
+	[SerializeField] private Slider surveySlider;
 
 	private void Start()
 	{
@@ -44,6 +45,7 @@ public class SwitchScript : MonoBehaviour
 				{
 					Reset();
 					surveyButton.interactable = true;
+					surveySlider.interactable = true;
 				}
 			}
 			else
