@@ -33,10 +33,15 @@ public class PlayerController : MonoBehaviour
 			OnLandEvent = new UnityEvent();
 	}
 
+	public bool GetIsGrounded()
+	{
+		return m_Grounded;
+	}
+
 	private void FixedUpdate()
 	{
-		/*bool wasGrounded = m_Grounded;
-		//m_Grounded = false;
+		//bool wasGrounded = m_Grounded;
+		m_Grounded = false;
 
 		// The player is grounded if a Physics Raycast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
@@ -51,16 +56,8 @@ public class PlayerController : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
-				if (!wasGrounded)
-				{
-					OnLandEvent.Invoke();
-				}
 			}
-		}*/
-
-		// For this game, it's not needed to check whether the player is grounded or not.
-		// You can't spam jump and you have a limited amount of jumps, so we need to be as forgiving as possible.
-		m_Grounded = true;
+		}
 	}
 
 	public void Move(float move, bool jump)
@@ -88,10 +85,12 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 		// If the player should jump...
-		if (m_Grounded && jump)
+		// For this game, it's not needed to check whether the player is grounded or not.
+		// You can't spam jump and you have a limited amount of jumps, so we need to be as forgiving as possible.
+		if (jump) //&& m_Grounded
 		{
 			// Add a vertical force to the player.
-			m_Grounded = false;
+			//m_Grounded = false;
 			m_rb2D.velocity = new Vector2(m_rb2D.velocity.x, 0f);
 			m_rb2D.AddForce(new Vector2(0f, m_JumpForce));
 		}

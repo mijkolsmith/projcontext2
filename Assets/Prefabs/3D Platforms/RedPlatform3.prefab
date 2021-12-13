@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6412343862779000123}
   - component: {fileID: 6412343862779000124}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RedPlatform3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
