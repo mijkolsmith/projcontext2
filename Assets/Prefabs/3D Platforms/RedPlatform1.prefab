@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8997200984679966455}
   - component: {fileID: 8997200984679966454}
   - component: {fileID: 8997200984679966449}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RedPlatform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

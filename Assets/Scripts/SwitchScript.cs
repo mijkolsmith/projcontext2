@@ -93,7 +93,6 @@ public class SwitchScript : MonoBehaviour
 
 	IEnumerator DelayedJumpAndSwitchPosition()
 	{
-		yield return new WaitForSeconds(.05f);
 		player.Jump();
 		yield return new WaitForSeconds(2f);
 		SwitchPosition();

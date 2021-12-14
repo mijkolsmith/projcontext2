@@ -102,6 +102,7 @@ MonoBehaviour:
   otherCameraChains: {fileID: 0}
   player: {fileID: 4206353715182333523}
   surveyButton: {fileID: 0}
+  surveySlider: {fileID: 0}
 --- !u!1 &1332304436
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,18 +351,6 @@ PrefabInstance:
     - target: {fileID: 9111769402219307614, guid: ddc833377c7213e4eae403e6020e0131, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9111769402219307614, guid: ddc833377c7213e4eae403e6020e0131, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9111769402219307614, guid: ddc833377c7213e4eae403e6020e0131, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.625
-      objectReference: {fileID: 0}
-    - target: {fileID: 9111769402219307614, guid: ddc833377c7213e4eae403e6020e0131, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.625
       objectReference: {fileID: 0}
     - target: {fileID: 9111769402219307614, guid: ddc833377c7213e4eae403e6020e0131, type: 3}
       propertyPath: m_LocalPosition.x

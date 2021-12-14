@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     public float runSpeed = 40f;
 
     private bool jump = false;
+    AnimatorScript animatorScript;
 
     //public DisablePlatform disablePlatform;
 
@@ -36,11 +37,17 @@ public class Player : MonoBehaviour
         Application.targetFrameRate = 30;
         controller = GetComponent<PlayerController>();
         sr = GetComponent<SpriteRenderer>();
+        animatorScript = GetComponentInChildren<AnimatorScript>();
     }
 
     private void Update()
     {
         horizontalMove = joystick.Horizontal == 0 ? 0 : joystick.Horizontal > 0 ? runSpeed : -runSpeed;
+        animatorScript.Run(horizontalMove);
+        if (controller.GetIsGrounded())
+		{
+            animatorScript.StopJumping();
+		}
 
         /*if (Input.GetButton(crouchString))
 		{
@@ -60,6 +67,7 @@ public class Player : MonoBehaviour
     public void Jump()
 	{
         jump = true;
+        animatorScript.StartJumping();
     }        
 
     /*private void OnCollisionEnter2D(Collision2D collision)
