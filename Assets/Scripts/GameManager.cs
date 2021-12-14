@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
         if (coins >= cost)
         {
             coins -= cost;
-            BuildBuilding((BuildingType)_type, new Vector3(Random.Range(0, 50), Random.Range(0, 2), Random.Range(0, 50)));
+            BuildBuilding((BuildingType)_type, new Vector3(Random.Range(-50, 100), Random.Range(0, 2), Random.Range(-50, 100)));
         } else
         {
             Debug.Log("Not enough coins");
