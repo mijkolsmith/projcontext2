@@ -59,11 +59,11 @@ public class GameManager : MonoBehaviour
     private void SetUpLedger()
     {
         buildingCosts = new Dictionary<BuildingType, int>();
-        buildingCosts.Add(BuildingType.House, 100);
-        buildingCosts.Add(BuildingType.Church, 1500);
-        buildingCosts.Add(BuildingType.Townhall, 800);
-        buildingCosts.Add(BuildingType.Windmill, 300);
-        buildingCosts.Add(BuildingType.Default, 500);
+        buildingCosts.Add(BuildingType.House, 10);
+        buildingCosts.Add(BuildingType.Church, 80);
+        buildingCosts.Add(BuildingType.Townhall, 50);
+        buildingCosts.Add(BuildingType.Windmill, 20);
+        buildingCosts.Add(BuildingType.Default, 50);
     }
 
     /// <summary>

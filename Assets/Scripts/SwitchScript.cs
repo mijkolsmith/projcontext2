@@ -10,12 +10,14 @@ public class SwitchScript : MonoBehaviour
 	[SerializeField] private GameObject cameraChains;
 	[SerializeField] private GameObject otherCameraChains;
 	private float pos1, pos2;
-	private Vector3 size1 = Vector3.one, size2 = 2 * Vector3.one;
+	private Vector3 size1 = Vector3.one, size2 = 1.7f * Vector3.one;
+	private bool buttonResizing = false;
 	private bool switching = false;
-	private bool growing = false;
 	private float timeStartedLerping;
 	private float lerpTime = .4f;
-	[SerializeField] private Player player;
+	private float buttonTimer = 0f;
+	private float buttonMaxSizeTime = 0.1f;
+    [SerializeField] private Player player;
 	[SerializeField] private Button surveyButton;
 	[SerializeField] private Slider surveySlider;
 
@@ -36,8 +38,7 @@ public class SwitchScript : MonoBehaviour
 			cameraChains.transform.localPosition = new Vector3(cameraChains.transform.localPosition.x, (2500f * camera.rect.y) - 528.21f, cameraChains.transform.localPosition.z);
 			otherCameraChains.transform.localPosition = new Vector3(otherCameraChains.transform.localPosition.x, (2500f * otherCamera.rect.y) + 310f, otherCameraChains.transform.localPosition.z);
 
-			if (growing) surveyButton.transform.localScale = Vector3.Lerp(size1, size2, percentageComplete * 1.5f);
-			else surveyButton.transform.localScale = Vector3.Lerp(size2, size1, percentageComplete);
+			if (buttonResizing) surveyButton.transform.localScale = Vector3.Lerp(size2, size1, percentageComplete);
 
 			if (pos1 > pos2)
 			{
@@ -64,9 +65,11 @@ public class SwitchScript : MonoBehaviour
 		camera.rect = new Rect(0, pos2, 1, 0.4f);
 		otherCamera.rect = new Rect(0, pos1, 1, 0.4f);
 		switching = false;
-		growing = false;
+		buttonResizing = false;
+		buttonResizing = false;
+        buttonTimer = 0f;
 
-		if (surveyButton.transform.localScale.x <= (size1 * 1.1f).x)
+        if (surveyButton.transform.localScale.x <= (size1 * 1.1f).x)
 		{
 			surveyButton.transform.localScale = size1;
 		}
@@ -76,18 +79,35 @@ public class SwitchScript : MonoBehaviour
 		}
 	}
 
+	private IEnumerator ResizeButtonThenSwitch()
+	{
+		while (buttonTimer < buttonMaxSizeTime)
+		{
+			buttonTimer += Time.deltaTime;
+            surveyButton.transform.localScale = Vector3.Lerp(size1, size2, buttonTimer / buttonMaxSizeTime);
+			yield return null;
+        }
+		buttonResizing = false;
+        surveyButton.transform.localScale = size2;
+        StartSwitching();
+    }
+
+	private void StartSwitching()
+	{
+		switching = true;
+        pos1 = camera.rect.y;
+        pos2 = otherCamera.rect.y;
+        timeStartedLerping = Time.time;
+    }
+
+
 	public void SwitchPosition()
 	{
-		if (switching == false)
+		if (!buttonResizing)
 		{
-			if (surveyButton.transform.localScale == size1)
-			{
-				growing = true;
-			}
-			pos1 = camera.rect.y;
-			pos2 = otherCamera.rect.y;
-			timeStartedLerping = Time.time;
-			switching = true;
+			buttonTimer = 0f;
+			StartCoroutine(ResizeButtonThenSwitch());
+            buttonResizing = true;
 		}
 	}
 
@@ -95,6 +115,8 @@ public class SwitchScript : MonoBehaviour
 	{
 		player.Jump();
 		yield return new WaitForSeconds(2f);
-		SwitchPosition();
-	}
+        buttonResizing = true;
+        StartSwitching();
+
+    }
 }
